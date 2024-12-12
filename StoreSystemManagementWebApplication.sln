@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35521.163 d17.12
+VisualStudioVersion = 17.12.35521.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreSystemManagementWebApplication", "StoreSystemManagementWebApplication\StoreSystemManagementWebApplication.csproj", "{C3ADCC68-EF49-4559-9A2B-3C3919CCA9B2}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "AngularStoreSystemProject", "AngularStoreSystemProject\AngularStoreSystemProject.esproj", "{AB7EAD0E-28A4-4BA9-8AAF-216823A7824D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,12 @@ Global
 		{C3ADCC68-EF49-4559-9A2B-3C3919CCA9B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3ADCC68-EF49-4559-9A2B-3C3919CCA9B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3ADCC68-EF49-4559-9A2B-3C3919CCA9B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB7EAD0E-28A4-4BA9-8AAF-216823A7824D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB7EAD0E-28A4-4BA9-8AAF-216823A7824D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB7EAD0E-28A4-4BA9-8AAF-216823A7824D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AB7EAD0E-28A4-4BA9-8AAF-216823A7824D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB7EAD0E-28A4-4BA9-8AAF-216823A7824D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB7EAD0E-28A4-4BA9-8AAF-216823A7824D}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
