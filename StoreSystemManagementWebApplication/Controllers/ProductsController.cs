@@ -3,23 +3,24 @@ using Microsoft.EntityFrameworkCore;
 using StoreSystemManagementWebApplication.Data;
 using StoreSystemManagementWebApplication.Models;
 using StoreSystemManagementWebApplication.Models.Entities;
+using StoreSystemManagementWebApplication.Repository;
 
 namespace StoreSystemManagementWebApplication.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly ApplicationDbContext dbContext;
-
-        public ProductsController(ApplicationDbContext dbContext)
+  
+        private readonly IProductRepository _productRepository; 
+        public ProductsController(IProductRepository productRepository)
         {
-            this.dbContext = dbContext;
+            
+            _productRepository = productRepository;
         }
 
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            var products = await dbContext.Products.ToListAsync();
-
+            var products = await _productRepository.GetAllProductsAsync();
             return View(products);
         }
 
@@ -32,6 +33,10 @@ namespace StoreSystemManagementWebApplication.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddProductViewModel viewModel)
         {
+            if (!ModelState.IsValid) 
+            {
+                return View(viewModel); 
+            }
             var product = new Product
             {
                 Name = viewModel.Name,
@@ -40,9 +45,8 @@ namespace StoreSystemManagementWebApplication.Controllers
                 Quantity = viewModel.Quantity,
                 Category = viewModel.Category,
             };
-            await dbContext.Products.AddAsync(product);
 
-            await dbContext.SaveChangesAsync();
+            await _productRepository.AddProductAsync(product);
 
             return RedirectToAction("List", "Products");
         }
@@ -50,7 +54,8 @@ namespace StoreSystemManagementWebApplication.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
-            var product = await dbContext.Products.FindAsync(id);
+
+            var product = await _productRepository.GetProductByIdAsync(id);
 
             return View(product);
         }
@@ -58,8 +63,11 @@ namespace StoreSystemManagementWebApplication.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Product viewModel)
         {
-
-            var product = await dbContext.Products.FindAsync(viewModel.Id);
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+            var product = await _productRepository.GetProductByIdAsync(viewModel.Id);
 
             if (product is not null)
             {
@@ -70,8 +78,10 @@ namespace StoreSystemManagementWebApplication.Controllers
                 product.Quantity = viewModel.Quantity;
                 product.Category = viewModel.Category;
 
-                await dbContext.SaveChangesAsync();
+                //await dbContext.SaveChangesAsync();
+                await _productRepository.UpdateProductAsync(product);
             }
+
 
 
             return RedirectToAction("List", "Products");
@@ -80,15 +90,16 @@ namespace StoreSystemManagementWebApplication.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(Guid Id)
         {
-            var product = await dbContext.Products
-                .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.Id  == Id);
-            if (product is not null)
-            {
+            //var product = await dbContext.Products
+            //    .AsNoTracking()
+            //    .FirstOrDefaultAsync(x => x.Id  == Id);
+            //if (product is not null)
+            //{
 
-                dbContext.Products.Remove(product);
-                await dbContext.SaveChangesAsync();
-            }
+            //    dbContext.Products.Remove(product);
+            //    await dbContext.SaveChangesAsync();
+            //}
+            await _productRepository.DeleteProductAsync(Id);
             return RedirectToAction("List", "Products");
         }
     }
