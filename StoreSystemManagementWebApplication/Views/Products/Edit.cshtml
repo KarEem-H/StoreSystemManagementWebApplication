@@ -1,0 +1,62 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@model StoreSystemManagementWebApplication.Models.Entities.Product
+
+<h1>Edit Product</h1>
+
+@if(Model is null){ 
+    <p> No Product was found with this id </p>
+}else{
+    
+
+<form method="post">
+
+    <div calss="mt-3">
+        <label class="form-label">Id</label>
+        <input type="text" class="form-control" asp-for="Id"  readonly/>
+
+    </div>
+
+    <div calss="mt-3">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" asp-for="Name" />
+
+    </div>
+
+    <div calss="mt-3">
+        <label class="form-label">Description</label>
+        <input type="text" class="form-control" asp-for="Description" />
+
+    </div>
+
+
+    <div calss="mt-3">
+        <label class="form-label">Price</label>
+        <input type="number" class="form-control" asp-for="Price" step="any" />
+
+    </div>
+
+    <div calss="mt-3">
+        <label class="form-label">Quantity</label>
+        <input type="number" class="form-control" asp-for="Quantity" />
+
+    </div>
+
+    <div calss="mt-3">
+        <label class="form-label">Category</label>
+        <input type="text" class="form-control" asp-for="Category" />
+
+    </div>
+    <br />
+    <div calss="mt-3">
+        <button type="submit" class="btn btn-primary">Update</button>
+        @* <button type="submit" class="btn btn-danger ms-3" asp-controller="Products" asp-action="Delete">Delete</button> *@
+    </div>
+
+</form>
+}
